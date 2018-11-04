@@ -1,0 +1,163 @@
+<header class="header" #header [ngClass]="{sticky: isSticky }">
+  <div class="container">
+    <div class="header__wrapper">
+
+      <div class="header__mmenu-button" (click)="visibleMobileMenu = true">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <div class="header__brand">
+        <a [routerLink]="['/home']"><img src="assets/images/logo-1.png" alt="logo"></a>
+      </div>
+
+      <div class="header__search">
+        <form [ngClass]="{'open': isSearching}">
+          <input pInputText type="text" class="form-control" placeholder="Search..." autocomplete="off" name="search"
+            formControlName="search" (blur)="isSearching = false" (focus)="isSearching = true">
+          <span><i class="fas fa-search"></i></span>
+        </form>
+      </div>
+
+      <nav class="header__nav">
+        <div class="header__nav--desktop">
+          <ul>
+            <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
+
+            <li *ngIf="isAuthenticated && user">
+              <a href="javascript:void(0)" (click)="showUserMenu(userMenuOverlay)">
+                <i class="fas fa-user"></i> {{ user?.username }}
+              </a>
+              <div class="dropdown-menu" [ngClass]="{'show': visibleUserMenu}" #userMenuOverlay>
+                <a href="javascript:void(0)">My Account</a>
+                <a href="javascript:void(0)" (click)="logout()">Logout</a>
+              </div>
+            </li>
+
+            <li *ngIf="!isAuthenticated">
+              <a href="javascript:void(0)" (click)="showLoginModal()">
+                <i class="fas fa-user"></i> Login
+              </a>
+            </li>
+
+            <li>
+              <a href="javascript:void(0);" (click)="showCart(cartOverlay)"><i class="fas fa-shopping-cart"></i>
+                <span class="d-sm-inline d-md-none"> Cart</span> <span class="badge badge-primary">1</span>
+              </a>
+              <div class="dropdown-menu" [ngClass]="{'show': visibleCart}" #cartOverlay>
+                <div class="header__cart">
+                  <ul>
+                    <li>
+                      <div class="pic">
+                        <img src="https://via.placeholder.com/100x100" alt="Product Name">
+                      </div>
+                      <div class="desc">
+                        <h5>Product Title</h5>
+                        <span>$500.00</span>
+                      </div>
+                      <div class="actions">
+                        <a href="javascript:void(0);"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="pic">
+                        <img src="https://via.placeholder.com/100x100" alt="Product Name">
+                      </div>
+                      <div class="desc">
+                        <h5>Product Title 2</h5>
+                        <span>$900.00</span>
+                      </div>
+                      <div class="actions">
+                        <a href="javascript:void(0);"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <div class="header__cart-totals">
+                    <span>Total: <strong>$1400.00</strong></span>
+                  </div>
+
+                  <div class="header__cart-actions">
+                    <button type="button" class="btn btn-primary btn-block">Go checkout!</button>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-bell"></i>
+                <span class="d-sm-inline d-md-none"> Notifications</span>
+                <span class="badge badge-primary">3</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="showCollapsedMenu(collapsedMenu)"><i class="fas fa-ellipsis-h"></i></a>
+              <div class="dropdown-menu" [ngClass]="{'show': visibleCollapsedMenu}" #collapsedMenu>
+                <a href="#" class="dropdown-menu__link">About us</a>
+                <a href="#" class="dropdown-menu__link">Terms and conditions</a>
+                <a href="#" class="dropdown-menu__link">Policy</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="header__nav--mobile" [ngClass]="{'header__nav--mobile--open': visibleMobileMenu }">
+
+          <span class="header__mmenu-button__close" (click)="visibleMobileMenu = false"><i class="fas fa-times"></i></span>
+
+          <div class="header__nav__user-box">
+            <div class="header__nav__user-box__avatar">
+              <img src="assets/images/nouser.png" alt="user">
+            </div>
+            <div class="header__nav__user-box__info">
+              <ng-container *ngIf="isAuthenticated">
+                <span>{{ user?.username }}</span>
+                <a href="javascript:void(0)" (click)="logout()">Logout</a>
+              </ng-container>
+              <ng-container *ngIf="!isAuthenticated">
+                <a href="javascript:void(0)" (click)="showLoginModal()">Login now</a>
+                <span>You're not logged in</span>
+              </ng-container>
+            </div>
+          </div>
+
+          <ul>
+            <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-primary">1</span></a></li>
+            <li><a href="#"> About us </a></li>
+            <li> <a href="#"> Terms and conditions </a></li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+  </div>
+</header>
+
+<p-dialog [(visible)]="visibleLoginModal" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false"
+  header="Login">
+  <app-login-form (formSubmmit)="login($event)" #loginForm>
+    <div class="links">
+      <a href="javascript:void(0)" (click)="showSignupModal()"> I don't have an account <i class="fas fa-user"></i></a>
+      <a href="javascript:void(0)">I forgot your password <i class="fas fa-unlock"></i></a>
+    </div>
+  </app-login-form>
+  <p-footer>
+    <button type="button" class="btn btn-primary" (click)="loginForm.handleSubmit()" [disabled]="!loginForm?.formValues?.valid">Login
+      Now</button>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog [(visible)]="visibleSignupModal" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false"
+  header="Sign Up">
+  <app-signup-form (formSubmmit)="signup($event)" #signupForm>
+    <div class="links">
+      <a href="javascript:void(0)" (click)="showLoginModal()"> I have an account <i class="fas fa-user"></i></a>
+      <a href="javascript:void(0)"> I forgot your password? <i class="fas fa-unlock"></i></a>
+    </div>
+  </app-signup-form>
+  <p-footer>
+    <button type="button" class="btn btn-primary" (click)="signupForm.handleSubmit()" [disabled]="!signupForm?.formValues?.valid">Sign
+      Up Now</button>
+  </p-footer>
+</p-dialog>
