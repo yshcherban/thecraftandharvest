@@ -1,0 +1,3 @@
+<label class="error" *ngIf="control?.dirty && checkError('required')">This field is required</label>
+<label class="error" *ngIf="control?.dirty && checkError('email')">Invalid email</label>
+<label class="error" *ngIf="control?.dirty && checkError('minlength')">Min length is {{ getError('minlength')?.requiredLength }}</label>

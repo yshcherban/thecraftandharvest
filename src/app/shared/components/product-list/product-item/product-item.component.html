@@ -1,0 +1,41 @@
+<div class="product-item">
+
+  <a href="javascript:void(0)" class="product-item__floating-button" tooltip="Add to your cart!" placement="top" delay="500">
+    <i class="fas fa-plus"></i>
+  </a>
+
+  <header class="product-item__header">
+    <h2>{{ name }}</h2>
+    <div class="product-item__header-clinks">
+      <a href="#" *ngFor="let cat of categories">{{ cat }}</a>
+    </div>
+  </header>
+
+  <div class="product-item__image-wrapper">
+    <div class="overlay">
+      <p class="description">{{ shortDescription }}...</p>
+      <a [routerLink]="['/product', id]" class="action btn btn-outline-light">See more</a>
+    </div>
+    <img src="{{ picture }}" alt="{{ name }}">
+  </div>
+
+  <!-- <div class="product-item__body">
+    <p>This is a short description</p>
+    <a href="#" class="btn btn-outline-primary">I wan this!</a>
+  </div> -->
+  <footer class="product-item__footer">
+    <!-- <div class="product-item__footer-item">
+      <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart"></i></button>
+    </div> -->
+    <div class="product-item__footer-item">
+      <i class="far fa-calendar-alt"></i>
+      <span> May 13, 2014</span>
+    </div>
+    <div class="product-item__footer-item">
+      <div class="product-item__header-clinks">
+        <a href="#" *ngFor="let tag of tags">{{ tag }}</a>
+      </div>
+    </div>
+  </footer>
+
+</div>

@@ -1,0 +1,280 @@
+/* You can add global styles to this file, and also import other style files */
+$primaryColor: #2d3447;
+$baseGray: #eaedef;
+$secondaryGray: #f9f9fa;
+$dusty: #96858f;
+$lavendar: #6d7993;
+$overcast: #9099a2;
+$paper: #d5d5d5;
+$softer: #f5f5f5;
+$darkerText: #272f33;
+
+@import '~primeng/resources/themes/nova-light/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';
+
+// Extra small devices (portrait phones, less than 576px)
+// @media (max-width: 575.98px) { ... }
+
+// Small devices (landscape phones, less than 768px)
+// @media (max-width: 767.98px) { ... }
+
+// Medium devices (tablets, less than 992px)
+// @media (max-width: 991.98px) { ... }
+
+// Large devices (desktops, less than 1200px)
+// @media (max-width: 1199.98px) { ... }
+
+body {
+  background: $baseGray;
+  // font-family: 'K2D', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+
+  a {
+    color: #6d7993;
+    outline: none;
+    &:hover {
+      color: #545454;
+      text-decoration: none;
+    }
+  }
+}
+
+.section-header {
+  color: #545454;
+  font-size: 3em;
+  font-weight: 100;
+  margin: 40px 0;
+  text-align: center;
+  // &::after {
+  //   content: '';
+  //   display: block;
+  //   height: 3px;
+  //   background: #545454;
+  // }
+}
+
+.container {
+  max-width: 95%;
+}
+
+// custom tooltips
+.ng-tooltip {
+  position: absolute;
+  max-width: 150px;
+  font-size: 14px;
+  text-align: center;
+  color: #f9f9fa;
+  padding: 5px 8px;
+  background: rgba($color: #000000, $alpha: 0.8);
+  border-radius: 4px;
+  z-index: 1000;
+  opacity: 0;
+}
+.ng-tooltip:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+}
+.ng-tooltip-top:after {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: rgba($color: #000000, $alpha: 0.8) transparent transparent
+    transparent;
+}
+.ng-tooltip-bottom:after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: transparent transparent rgba($color: #000000, $alpha: 0.8)
+    transparent;
+}
+.ng-tooltip-left:after {
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent transparent transparent
+    rgba($color: #000000, $alpha: 0.8);
+}
+.ng-tooltip-right:after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent rgba($color: #000000, $alpha: 0.8) transparent
+    transparent;
+}
+.ng-tooltip-show {
+  opacity: 1;
+}
+
+// Primeng dialog reset
+.ui-dialog-mask {
+  z-index: 99;
+}
+
+body {
+  .ui-widget-overlay {
+    background-color: rgba(51, 51, 51, 0.9);
+  }
+
+  .ui-dialog {
+    border-radius: 8px;
+    background-color: #f9f9fa;
+
+    .ui-dialog-titlebar {
+      background-color: #f9f9fa;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      padding: 20px 60px;
+      .ui-dialog-title {
+        color: $darkerText;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 5px;
+        margin-bottom: 0;
+      }
+    }
+
+    .ui-dialog-content {
+      background-color: #f9f9fa;
+      border: none;
+      border-top: 1px solid $paper;
+      border-radius: 0 0 8px 8px;
+      color: $darkerText;
+      padding: 0;
+      position: initial;
+      overflow-y: auto;
+      .links {
+        margin-top: 40px;
+        a {
+          display: block;
+          margin-bottom: 10px;
+          width: 100%;
+        }
+      }
+    }
+
+    .ui-dialog-footer {
+      background-color: #f9f9fa;
+      border: none;
+      border-top: 1px solid #d5d5d5;
+      border-radius: 0 0 8px 8px;
+      top: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      button {
+        margin-right: 15px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .ui-dialog-titlebar-icon {
+      font-size: 2em;
+      color: #8e8e8e;
+      position: absolute;
+      right: 10px;
+    }
+  }
+}
+
+// Form controls fixes
+body {
+  ::placeholder {
+    color: #ced4da;
+  }
+  .ui-inputtext,
+  .ui-dropdown,
+  .ui-multiselect {
+    border: 1px solid $paper;
+    color: #495057;
+    width: 100%;
+
+    &:enabled:focus:not(.ui-state-error) {
+      border-color: $primaryColor;
+    }
+
+    &:enabled:hover:not(.ui-state-error) {
+      border-color: $paper;
+    }
+
+    &:not(.ui-state-disabled):focus,
+    &:not(.ui-state-disabled).ui-state-focus {
+      border-color: $primaryColor;
+    }
+  }
+
+  .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight,
+  .ui-dropdown-panel
+    .ui-dropdown-items
+    .ui-dropdown-item-group.ui-state-highlight,
+  .ui-autocomplete-panel
+    .ui-autocomplete-items
+    .ui-autocomplete-list-item.ui-state-highlight {
+    background-color: $primaryColor;
+  }
+
+  .ui-autocomplete .ui-autocomplete-input {
+    padding: 0.64em 0.429em;
+    width: 100%;
+  }
+
+  .ui-multiselect-panel
+    .ui-multiselect-header
+    .ui-multiselect-filter-container {
+    width: 90%;
+  }
+  .ui-inputgroup .ui-inputgroup-addon {
+    background-color: #f1f0f0;
+    border-color: $paper;
+  }
+  .ui-progressbar .ui-progressbar-label {
+    color: #f1f0f0;
+  }
+  .ui-inputgroup.price {
+    input {
+      width: auto;
+      text-align: right;
+    }
+  }
+}
+
+.ui-inputtext {
+  padding: 9px 5px;
+  width: 100%;
+}
+
+.ui-dropdown {
+  display: block;
+  padding: 3px 0;
+  width: 100%;
+}
+
+.ui-multiselect {
+  &-label {
+    margin-bottom: 0;
+  }
+}
+.ui-dropdown {
+  display: block;
+  padding: 3px 0;
+  width: 100%;
+}
+
+.ui-autocomplete {
+  display: block;
+  width: 100%;
+}
+
+.ui-calendar {
+  display: block;
+  width: 100%;
+}
