@@ -1,8 +1,0 @@
-<div class="rating" *ngIf="type === 'smiles'">
-  <i class="icon-smile voted" [ngClass]="{voted: !!vote }" *ngFor="let vote of ratingIterable"></i>
-  <small *ngIf="hasCounter">({{ counter }})</small>
-</div>
-<div class="rating" *ngIf="type === 'stars'">
-  <i class="icon-star voted" [ngClass]="{voted: !!vote }" *ngFor="let vote of ratingIterable"></i>
-  <small *ngIf="hasCounter">({{ counter }})</small>
-</div>

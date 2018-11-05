@@ -1,9 +1,0 @@
-<div class="carousel">
-  <ngu-carousel [inputs]="carouselConfig" [dataSource]="dataList" (onMove)="onSliderMoveFn($event)" class="carousel__{{ type }}">
-    <ngu-tile *nguCarouselDef="let item; let j = index">
-      <ng-container *ngTemplateOutlet="itemTemplate; context: {item: item}"></ng-container>
-    </ngu-tile>
-    <button NguCarouselPrev class="arrow prev"></button>
-    <button NguCarouselNext class="arrow next"></button>
-  </ngu-carousel>
-</div>
