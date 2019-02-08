@@ -6,6 +6,23 @@
   padding: 30px 0;
   margin-top: 40px;
 
+  &__info {
+      .fa-envelope,
+      .fa-phone {
+        margin-right: 7px;
+      }
+
+    span.weekends {
+      font-weight: bold;
+    }
+
+    div.working-hours {
+      > p:nth-of-type(1) {
+        text-decoration: underline;
+      }
+    }
+  }
+
   &__about {
     text-align: left;
     margin-top: 10px;
