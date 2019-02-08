@@ -17,9 +17,11 @@ export class HomeComponent implements OnInit {
   lastIndex = 10;
   doneLoading = false;
   carouselImages = [
-    'https://placeimg.com/1200/600/tech',
-    'https://placeimg.com/1300/700/tech',
-    'https://placeimg.com/1100/400/tech'
+    'assets/images/banner/craftandharvest-slide-1.jpg',
+    'assets/images/banner/craftandharvest-slide-2.jpg',
+    'assets/images/banner/craftandharvest-slide-3.jpg',
+    'assets/images/banner/craftandharvest-slide-4.jpg',
+    'assets/images/banner/craftandharvest-slide-5.jpg'
   ];
 
   constructor(
