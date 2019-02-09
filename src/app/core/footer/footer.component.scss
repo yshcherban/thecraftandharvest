@@ -3,10 +3,11 @@
   color: #6d7993;
   display: block;
   width: 100%;
-  padding: 30px 0;
+  padding: 0 0 30px;
   margin-top: 40px;
 
   &__info {
+      padding-top: 30px;
       .fa-envelope,
       .fa-phone {
         margin-right: 7px;

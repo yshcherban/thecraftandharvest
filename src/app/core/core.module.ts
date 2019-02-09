@@ -11,6 +11,8 @@ import { PipesModule } from '../shared/pipes';
 import { PrimeNGModule } from '../shared/primeng.module';
 import { AuthModule } from '../shared/components';
 
+import { GooglemapComponent } from './googlemap/googlemap.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -19,13 +21,17 @@ import { AuthModule } from '../shared/components';
     RouterModule,
     PrimeNGModule,
     PipesModule,
-    AuthModule
+    AuthModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDr1tXLGo7mhzb8Y_VZPakDh32hKawFSoQ'
+    })
   ],
   declarations: [
     Page404Component,
     LayoutComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    GooglemapComponent
   ],
   exports: [
     Page404Component,
