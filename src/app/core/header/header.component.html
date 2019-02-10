@@ -10,19 +10,15 @@
         <a [routerLink]="['/home']"><img src="assets/images/logo.png" alt="logo"></a>
       </div>
 
-      <div class="header__search">
-        <form [ngClass]="{'open': isSearching}">
-          <input pInputText type="text" class="form-control" placeholder="Search..." autocomplete="off" name="search"
-            formControlName="search" (blur)="isSearching = false" (focus)="isSearching = true">
-          <span><i class="fas fa-search"></i></span>
-        </form>
-      </div>
-
       <nav class="header__nav">
         <div class="header__nav--desktop">
-          <ul>
-            <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
+          <ul class="nav-links">
+            <li><a [routerLink]="['/home']"> Home</a></li>
+            <li><a [routerLink]="['/shop']"> Shop</a></li>
+            <li><a [routerLink]="['/contact']"> Contact</a></li>
+          </ul>
 
+          <ul>
             <li *ngIf="isAuthenticated && user">
               <a href="javascript:void(0)" (click)="showUserMenu(userMenuOverlay)">
                 <i class="fas fa-user"></i> {{ user?.username }}
@@ -122,6 +118,8 @@
 
           <ul>
             <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
+            <li><a [routerLink]="['/shop']"><i class="fas fa-shopping-bag"></i> Shop</a></li>
+            <li><a [routerLink]="['/contact']"><i class="fas fa-map-marker-alt"></i> Contact</a></li>
             <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-primary">1</span></a></li>
             <li><a href="#"> About us </a></li>
             <li> <a href="#"> Terms and conditions </a></li>

@@ -103,6 +103,10 @@
 }
 
 .header__nav {
+  flex-grow: 1;
+  align-items: center;
+  display: flex;
+
   &--desktop,
   &--mobile {
     ul {
@@ -151,7 +155,22 @@
   }
 
   &--desktop {
-    flex: 0 0 325px;
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+
+    .nav-links {
+      li > a {
+        &:hover {
+          background-color: inherit;
+        }
+      }
+
+      li:nth-child(n+2) {
+        margin-left: 20px;
+      }
+    }
+
     ul {
       text-align: right;
     }

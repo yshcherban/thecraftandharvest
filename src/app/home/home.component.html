@@ -15,14 +15,3 @@
     <button class="btn btn-primary" type="button"><i class="fas fa-filter"></i></button>
   </app-floating-button>
 </app-layout>
-
-<p-dialog [(visible)]="visibleProductForm" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false"
-  [positionTop]="20" header="Add a new product">
-  <app-product-form (formSubmit)="handleProductSubmit($event)" #productForm></app-product-form>
-  <p-footer>
-    <button type="button" class="btn btn-primary" (click)="productForm.handleSubmit()" *ngIf="productForm?.steps === 1"
-      [disabled]="!productForm?.formValues?.valid">Submit Product</button>
-    <button type="button" class="btn btn-secondary" (click)="productForm.startUpload()" *ngIf="productForm?.steps !== 1"
-      [disabled]="productForm?.images?.length <= 0 || productForm?.steps === 5">Continue</button>
-  </p-footer>
-</p-dialog>
