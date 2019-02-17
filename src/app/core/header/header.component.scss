@@ -20,6 +20,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   padding: 15px 0;
+  align-items: center;
 }
 
 .header__mmenu-button {
@@ -53,6 +54,7 @@
     max-width: 100%;
     height: auto;
     width: 100%;
+    vertical-align: super;
   }
 }
 
