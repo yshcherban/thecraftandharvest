@@ -50,7 +50,7 @@
   flex: 0 0 150px;
   margin-right: 25px;
   img {
-    max-width: 120px;
+    max-width: 100%;
     height: auto;
     width: 100%;
   }
@@ -339,6 +339,24 @@
   }
   &-actions {
     display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .header__wrapper {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .header__mmenu-button {
+    position: static;
+  }
+
+  .header__wrapper .header__brand {
+    img {
+      width: 300px;
+      margin: 0 auto 5px;
+    }
   }
 }
 
