@@ -79,14 +79,6 @@
                 </div>
               </div>
             </li>
-            <li>
-              <a href="javascript:void(0)" (click)="showCollapsedMenu(collapsedMenu)"><i class="fas fa-ellipsis-h"></i></a>
-              <div class="dropdown-menu" [ngClass]="{'show': visibleCollapsedMenu}" #collapsedMenu>
-                <a href="#" class="dropdown-menu__link">About us</a>
-                <a href="#" class="dropdown-menu__link">Terms and conditions</a>
-                <a href="#" class="dropdown-menu__link">Policy</a>
-              </div>
-            </li>
           </ul>
         </div>
 
@@ -115,9 +107,6 @@
             <li><a [routerLink]="['/shop']"><i class="fas fa-shopping-bag"></i> Shop</a></li>
             <li><a [routerLink]="['/contact']"><i class="fas fa-map-marker-alt"></i> Contact</a></li>
             <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-primary">1</span></a></li>
-            <li><a href="#"> About us </a></li>
-            <li> <a href="#"> Terms and conditions </a></li>
-            <li> <a href="#"> Policy </a></li>
           </ul>
         </div>
 
