@@ -51,10 +51,19 @@
   flex: 0 0 150px;
   margin-right: 25px;
   img {
-    max-width: 100%;
     height: auto;
-    width: 100%;
-    vertical-align: super;
+    width: 215px;
+    padding: 0 0 15px;
+    vertical-align: top;
+  }
+}
+
+header.header.sticky {
+  .header__brand {
+    img {
+      max-width: 100%;
+      padding: 0 0 11px;
+    }
   }
 }
 
@@ -356,8 +365,10 @@
 
   .header__wrapper .header__brand {
     img {
-      width: 300px;
-      margin: 0 auto 5px;
+      width: 200px;
+      margin: 0 auto 0 5px;
+      max-width: 100%;
+      padding: 0 0 10px;
     }
   }
 }
