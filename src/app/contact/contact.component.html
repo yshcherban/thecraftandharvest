@@ -1,7 +1,53 @@
 <app-layout>
   <div class="container">
     <div class="intro-image">
-      <img src="assets/images/contact-header.jpg" alt="Craft & Harvets" class="img-fluid">
+      <img src="assets/images/contact-header.jpg" alt="Craft & Harvets" class="img-fluid img-contact-page">
     </div>
+    <form class="contact-page-form">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your Name"
+                    required
+                >
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Your E-mail"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  placeholder="Your Message"
+                  required
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button class="btn btn-warning btn-lg" type="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </app-layout>
