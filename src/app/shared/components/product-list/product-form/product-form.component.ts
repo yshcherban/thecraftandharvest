@@ -5,6 +5,7 @@ import { NotifyService } from 'ngx-notify';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 
 import { UtilsService } from '../../../services';
+import api from '../../../../../config/api.json';
 
 enum Steps {
   INVALID = -1,
@@ -93,7 +94,7 @@ export class ProductFormComponent implements OnInit {
   startUpload(): void {
     const event: UploadInput = {
       type: 'uploadAll',
-      url: 'http://localhost/cesar/upload.php',
+      url: `${api.url}/product_images_create/`,
       method: 'POST'
       // includeWebKitFormBoundary: true,
       // data: {}
