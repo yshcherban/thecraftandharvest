@@ -5,7 +5,9 @@ import { NotifyService } from 'ngx-notify';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 
 import { UtilsService } from '../../../services';
-import api from '../../../../../config/api.json';
+//import api from '../../../../../config/api.json';
+const api = require('../../../../../config/api.json');
+//import api from '../../../../../config/api.json';
 
 enum Steps {
   INVALID = -1,
