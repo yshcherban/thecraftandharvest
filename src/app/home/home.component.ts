@@ -10,11 +10,9 @@ import { ScreenService, BackendService } from '../shared/services';
 })
 export class HomeComponent implements OnInit {
   carouselImages = [
-    'assets/images/banner/craftandharvest-slide-1.jpg',
-    'assets/images/banner/craftandharvest-slide-2.jpg',
-    'assets/images/banner/craftandharvest-slide-3.jpg',
-    'assets/images/banner/craftandharvest-slide-4.jpg',
-    'assets/images/banner/craftandharvest-slide-5.jpg'
+    'assets/images/banner/craftandharvest-slide-6.png',
+    'assets/images/banner/craftandharvest-slide-7.jpg',
+    'assets/images/banner/craftandharvest-slide-8.jpg',
   ];
 
   constructor(
