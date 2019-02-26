@@ -6,3 +6,4 @@ export * from './screen/screen.service';
 export * from './utils/utils.service';
 export * from './auth/auth.service';
 export * from './auth/auth-guard.service';
+export * from './mail/mail.service';
