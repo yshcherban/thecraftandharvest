@@ -102,14 +102,12 @@ export class HeaderComponent implements OnInit {
   }
 
   signup({ formValues, valid }) {
-    const { password, passwordConfirm, firstname, lastname } = formValues;
+    const { password, passwordConfirm } = formValues;
     this.screen.block = true;
     if (valid) {
       this.auth.signup({ ...formValues,
           password1: password,
           password2: passwordConfirm,
-          first_name: firstname,
-          last_name: lastname,
         })
         .subscribe((res: any) => {
           const { status } = res;
