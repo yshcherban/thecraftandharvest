@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifyService } from 'ngx-notify';
 
-import { ScreenService, BackendService } from '../shared/services';
+import { AuthService, ScreenService, BackendService } from '../shared/services';
 
 @Component({
   selector: 'app-shop',
@@ -21,6 +21,7 @@ export class ShopComponent implements OnInit {
     private screen: ScreenService,
     private notify: NotifyService,
     private backend: BackendService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -30,6 +31,14 @@ export class ShopComponent implements OnInit {
       this.loadMoreItems();
       this.screen.block = false;
     });
+  }
+
+  get checkIsAdmin() {
+    if(this.auth.user) {
+      return this.auth.user.username === 'ialcazar';
+    }
+
+    return false;
   }
 
   showProductForm() {
