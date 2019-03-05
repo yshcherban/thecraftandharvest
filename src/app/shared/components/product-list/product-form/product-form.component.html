@@ -1,74 +1,43 @@
 <div class="product-form">
   <form novalidate (ngSubmit)="handleSubmit()" [formGroup]="form">
 
-    <ng-container *ngIf="steps === 1">
-      <div class="form-group">
-        <label>Product Name</label>
-        <input pInputText type="text" class="form-control" autocomplete="off" formControlName="name" placeholder="Enter your product name">
-        <app-error-label [control]="getControl('name')"></app-error-label>
+    <div class="form-group">
+      <label>Product Name</label>
+      <input pInputText type="text" class="form-control" autocomplete="off"
+             formControlName="name"
+             placeholder="Enter your product name">
+      <app-error-label [control]="getControl('name')"></app-error-label>
+    </div>
+
+    <div class="form-group">
+      <label>Product SKU</label>
+      <input pInputText type="text" class="form-control" autocomplete="off"
+             formControlName="sku"
+             placeholder="SKU">
+      <app-error-label [control]="getControl('sku')"></app-error-label>
+    </div>
+
+    <div class="form-group">
+      <label>Product Price</label>
+      <div class="ui-inputgroup price">
+        <span class="ui-inputgroup-addon">$</span>
+        <input type="text" pInputText formControlName="price" placeholder="0">
+        <span class="ui-inputgroup-addon">.00</span>
       </div>
+      <app-error-label [control]="getControl('price')"></app-error-label>
+    </div>
 
-      <div class="form-group">
-        <label>Product Price</label>
-        <div class="ui-inputgroup price">
-          <span class="ui-inputgroup-addon">$</span>
-          <input type="text" pInputText formControlName="price" placeholder="0">
-          <span class="ui-inputgroup-addon">.00</span>
-        </div>
-        <app-error-label [control]="getControl('price')"></app-error-label>
-      </div>
+    <div class="form-group">
+      <label>Product Description</label>
+      <textarea pInputTextarea class="form-control" autocomplete="off" formControlName="description" [rows]="5"></textarea>
+      <app-error-label [control]="getControl('description')"></app-error-label>
+    </div>
 
-      <div class="form-group">
-        <label>Product Description</label>
-        <textarea pInputTextarea class="form-control" autocomplete="off" formControlName="description" [rows]="5"></textarea>
-        <app-error-label [control]="getControl('description')"></app-error-label>
-      </div>
-
-
-      <div class="form-group">
-        <label>Categories</label>
-        <p-multiSelect [options]="categorieList" formControlName="categories"></p-multiSelect>
-        <app-error-label [control]="getControl('categories')"></app-error-label>
-      </div>
-
-      <div class="form-group">
-        <label>Tags</label>
-        <p-chips autocomplete="off" formControlName="tags"></p-chips>
-        <app-error-label [control]="getControl('tags')"></app-error-label>
-      </div>
-    </ng-container>
-
-
-    <ng-container *ngIf="steps === 0 || steps === 5">
-      <div class="form-group">
-        <label>Product Images</label>
-        <div class="drop-container" ngFileDrop [options]="uploadingOptions" (uploadOutput)="onUploadOutput($event)"
-          [uploadInput]="uploadInput" [ngClass]="{'is-drop-over': dragOver, 'is-done': this.images.length >= 4}" #uploader>
-          <div class="drop-content">
-            <i class="fas fa-camera"></i>
-            <span>Drag images here.</span>
-            <small>Up to 4 images in png or jpg format allowed</small>
-          </div>
-        </div>
-        <div class="product-form__images-list" *ngIf="images?.length > 0">
-          <ul>
-            <li *ngFor="let image of images">
-              <div class="image-wrapper">
-                <img [src]="getBlobImage(image?.nativeFile)">
-              </div>
-              <span>{{ image?.name }}</span>
-              <a href="javascript:void(0)" (click)="removeImage(image?.id)"><i class="fas fa-trash"></i></a>
-              <div class="status">
-                <p-progressBar [value]="image?.progress?.data?.percentage" *ngIf="image?.progress?.data?.percentage > 0"></p-progressBar>
-                <span class="text-danger" *ngIf="image?.error">{{ image?.error }}</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </ng-container>
-
-
+    <div class="form-group">
+      <label>Tags</label>
+      <p-chips autocomplete="off" formControlName="product_tag"></p-chips>
+      <app-error-label [control]="getControl('product_tag')"></app-error-label>
+    </div>
 
   </form>
 </div>

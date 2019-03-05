@@ -36,14 +36,6 @@ export class ProductFormComponent implements OnInit {
   images: UploadFile[];
   humanizeBytes: Function;
 
-  categorieList = [
-    {label: 'Escenta', value: {id: 1, code: 'esc'}},
-    {label: 'Icology', value: {id: 2, code: 'ico'}},
-    {label: 'Nixelt', value: {id: 3, code: 'nix'}},
-    {label: 'Dognost', value: {id: 4, code: 'dog'}},
-    {label: 'Jetsilk', value: {id: 5, code: 'jet'}},
-    {label: 'Pharmacon', value: {id: 6, code: 'phar'}}
-  ];
 
   constructor(
     private fb: FormBuilder,
@@ -69,13 +61,6 @@ export class ProductFormComponent implements OnInit {
       this.form.patchValue(this.data);
     }
     this.steps = Steps.READY;
-    this.form.patchValue({
-      name: 'Test 1',
-      price: 200,
-      description: 'This is just a test product',
-      categories: [{id: 1, code: 'esc'}, {id: 2, code: 'ico'}],
-      tags: ['tag1', 'tag2']
-    });
   }
 
   handleSubmit() {
@@ -167,11 +152,9 @@ export class ProductFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      product_tag: [[], Validators.required],
       price: ['', Validators.required],
-      categories: [[], Validators.required],
-      tags: [[], Validators.required],
-      images: [[], Validators.required],
-      image: ['', Validators.required],
+      sku: ['', Validators.required]
     });
   }
 }
