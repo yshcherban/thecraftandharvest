@@ -38,6 +38,11 @@
       <p-chips autocomplete="off" formControlName="product_tag"></p-chips>
       <app-error-label [control]="getControl('product_tag')"></app-error-label>
     </div>
-
+    <p-footer>
+      <button
+              [disabled]="!form.valid"
+              class="btn btn-primary"
+              type="submit">Submit Product</button>
+    </p-footer>
   </form>
 </div>

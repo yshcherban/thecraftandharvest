@@ -9,6 +9,8 @@ import { UtilsService } from '../../../services';
 const api = require('../../../../../config/api.json');
 //import api from '../../../../../config/api.json';
 
+import { BackendService } from '../../../../shared/services';
+
 enum Steps {
   INVALID = -1,
   READY = 0,
@@ -26,7 +28,6 @@ enum Steps {
 })
 export class ProductFormComponent implements OnInit {
   @Input() data: object;
-  @Output() formSubmit: EventEmitter<any> = new EventEmitter();
   @ViewChild('uploader') uploader: ElementRef;
   form: FormGroup;
   steps: Steps = Steps.INVALID;
@@ -41,6 +42,7 @@ export class ProductFormComponent implements OnInit {
     private fb: FormBuilder,
     private notify: NotifyService,
     private utils: UtilsService,
+    private backend: BackendService,
     ) {
     this.buildForm();
     this.uploadingOptions = { concurrency: 1, maxUploads: 4, allowedContentTypes: ['image/png', 'image/jpeg'] };
@@ -64,7 +66,23 @@ export class ProductFormComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.formSubmit.emit(this.formValues);
+    const {name, description, product_tag, price, sku} = this.formValues.formValues;
+    const product = {
+      name,
+      description,
+      product_tag,
+      price,
+      sku
+    };
+
+    this.backend.saveProduct(product).subscribe((res: any) => {
+      const { status } = res;
+      if (status === 201) {
+
+        this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
+      }
+    });
+
   }
 
   resetForm() {

@@ -25,8 +25,5 @@
           [resizable]="false"
           [draggable]="false"
           [positionTop]="20" header="Add a new product">
-  <app-product-form (formSubmit)="handleProductSubmit($event)" #productForm></app-product-form>
-  <p-footer>
-    <button type="button" [disabled]="productForm.invalid" class="btn btn-primary" (click)="productForm.handleSubmit()">Submit Product</button>
-  </p-footer>
+  <app-product-form></app-product-form>
 </p-dialog>

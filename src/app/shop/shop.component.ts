@@ -59,10 +59,4 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  handleProductSubmit({ formValues, valid }) {
-    console.log('form is ', formValues);
-
-  }
-
-
 }
