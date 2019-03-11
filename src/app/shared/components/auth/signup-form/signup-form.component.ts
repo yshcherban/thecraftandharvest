@@ -56,8 +56,6 @@ export class SignupFormComponent implements OnInit {
   private buildForm() {
     this.form = this.fb.group({
       username: ['', Validators.required],
-      firstname: [''],
-      lastname: [''],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       passwordConfirm: ['', Validators.required],

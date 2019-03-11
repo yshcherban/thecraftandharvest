@@ -102,25 +102,20 @@ export class HeaderComponent implements OnInit {
   }
 
   signup({ formValues, valid }) {
-    const { password, passwordConfirm, firstname, lastname } = formValues;
+    const { password, passwordConfirm } = formValues;
     this.screen.block = true;
     if (valid) {
       this.auth.signup({ ...formValues,
           password1: password,
           password2: passwordConfirm,
-          first_name: firstname,
-          last_name: lastname,
         })
         .subscribe((res: any) => {
-          const { body: { user, token }, status } = res;
+          const { status } = res;
           if (status === 201) {
-            this.auth.saveToken(token);
-            this.auth.saveUser(user);
-            if (!!user) {
-              this.user = user;
-            }
             this.visibleSignupModal = false;
-            this.notify.info(`Hi ${user.username}`, `Welcome aboard!`, { timeout: 3000 });
+            this.notify.info(`Attention!`,
+              `Please confirm your email address to complete your registration!`, { timeout: 7000 });
+
           }
       },
       this.onLoginError.bind(this),
