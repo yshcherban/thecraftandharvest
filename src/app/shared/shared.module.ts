@@ -16,7 +16,8 @@ import {
   APIService,
   UtilsService,
   BackendService,
-  AuthService
+  AuthService,
+  MailService
 } from './services';
 
 export function HTTPConfig(http: Http) {
@@ -82,6 +83,7 @@ export class SharedModule {
         BackendService,
         AuthService,
         JwtHelperService,
+        MailService,
         {
           provide: HttpService,
           useFactory: HTTPConfig,

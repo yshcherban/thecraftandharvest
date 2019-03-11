@@ -1,7 +1,70 @@
 <app-layout>
   <div class="container">
     <div class="intro-image">
-      <img src="assets/images/contact-header.jpg" alt="Craft & Harvets" class="img-fluid">
+      <img src="assets/images/contact-header.jpg" alt="Craft & Harvets" class="img-fluid img-contact-page">
     </div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="contactForm" class="contact-page-form" novalidate>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  placeholder="Your Name"
+                >
+                <app-error-label [control]="getControl('name')"></app-error-label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="Your Email"
+                >
+                <app-error-label [control]="getControl('email')"></app-error-label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="subject"
+                  placeholder="Subject"
+                >
+                <app-error-label [control]="getControl('subject')"></app-error-label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  formControlName="message"
+                  placeholder="Your Message"
+                ></textarea>
+                <app-error-label [control]="getControl('message')"></app-error-label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button
+                class="btn btn-warning btn-lg"
+                type="submit"
+                [disabled]="!contactForm.valid">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </app-layout>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HomeModule } from './home';
 import { ProductViewModule } from './product-view';
@@ -34,7 +35,8 @@ import { ContactComponent } from './contact/contact.component';
     UtilsModule,
     PipesModule,
     PrimeNGModule,
-    DirectivesModule
+    DirectivesModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
