@@ -35,7 +35,7 @@ export class ShopComponent implements OnInit {
 
   get checkIsAdmin() {
     if(this.auth.user) {
-      return this.auth.user.username === 'ialcazar';
+      return this.auth.user.is_admin ? true : false;
     }
 
     return false;
