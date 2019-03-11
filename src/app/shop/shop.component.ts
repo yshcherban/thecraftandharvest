@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifyService } from 'ngx-notify';
 
-import { ScreenService, BackendService } from '../shared/services';
+import { AuthService, ScreenService, BackendService } from '../shared/services';
 
 @Component({
   selector: 'app-shop',
@@ -21,6 +21,7 @@ export class ShopComponent implements OnInit {
     private screen: ScreenService,
     private notify: NotifyService,
     private backend: BackendService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -30,6 +31,14 @@ export class ShopComponent implements OnInit {
       this.loadMoreItems();
       this.screen.block = false;
     });
+  }
+
+  get checkIsAdmin() {
+    if(this.auth.user) {
+      return this.auth.user.is_admin ? true : false;
+    }
+
+    return false;
   }
 
   showProductForm() {
@@ -49,26 +58,5 @@ export class ShopComponent implements OnInit {
       this.doneLoading = true;
     }
   }
-
-  handleProductSubmit({ formValues, valid }) {
-    console.log('form is ', formValues);
-    const { name } = formValues;
-    if (valid) {
-      this.notify.success('Yey', `Your product ${name} was succesfully uploaded`, { timeout: 3000 });
-      this.visibleProductForm = false;
-    }
-    // this.screen.block = true;
-    this.backend.saveProduct({
-      ...formValues,
-      sku: Math.random().toString(36).substring(7),
-      image: `http://testimages.com/${formValues.image}`,
-      cart: 'http://be.craftandharvest.com/api/carts/1/'
-    })
-      .subscribe((res: any) => {
-        console.log('response is ', res);
-        this.screen.block = false;
-      });
-  }
-
 
 }

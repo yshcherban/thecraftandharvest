@@ -1,20 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { NotifyService } from 'ngx-notify';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
-
 import { UtilsService } from '../../../services';
+const api = require('../../../../../config/api.json');
+import { BackendService } from '../../../../shared/services';
 
-enum Steps {
-  INVALID = -1,
-  READY = 0,
-  UPLOADED_IMAGES = 1,
-  FILLING_FORM = 2,
-  CANCELED = 3,
-  DONE = 4,
-  ERROR = 5,
-}
 
 @Component({
   selector: 'app-product-form',
@@ -23,29 +14,20 @@ enum Steps {
 })
 export class ProductFormComponent implements OnInit {
   @Input() data: object;
-  @Output() formSubmit: EventEmitter<any> = new EventEmitter();
-  @ViewChild('uploader') uploader: ElementRef;
+  //@ViewChild('uploader') uploader: ElementRef;
   form: FormGroup;
-  steps: Steps = Steps.INVALID;
   uploadInput: EventEmitter<UploadInput> = new EventEmitter();
-  dragOver = false;
+  dragOver: boolean;
   uploadingOptions: UploaderOptions;
   images: UploadFile[];
   humanizeBytes: Function;
 
-  categorieList = [
-    {label: 'Escenta', value: {id: 1, code: 'esc'}},
-    {label: 'Icology', value: {id: 2, code: 'ico'}},
-    {label: 'Nixelt', value: {id: 3, code: 'nix'}},
-    {label: 'Dognost', value: {id: 4, code: 'dog'}},
-    {label: 'Jetsilk', value: {id: 5, code: 'jet'}},
-    {label: 'Pharmacon', value: {id: 6, code: 'phar'}}
-  ];
 
   constructor(
     private fb: FormBuilder,
     private notify: NotifyService,
     private utils: UtilsService,
+    private backend: BackendService,
     ) {
     this.buildForm();
     this.uploadingOptions = { concurrency: 1, maxUploads: 4, allowedContentTypes: ['image/png', 'image/jpeg'] };
@@ -65,18 +47,26 @@ export class ProductFormComponent implements OnInit {
     if (!!this.data) {
       this.form.patchValue(this.data);
     }
-    this.steps = Steps.READY;
-    this.form.patchValue({
-      name: 'Test 1',
-      price: 200,
-      description: 'This is just a test product',
-      categories: [{id: 1, code: 'esc'}, {id: 2, code: 'ico'}],
-      tags: ['tag1', 'tag2']
-    });
   }
 
   handleSubmit() {
-    this.formSubmit.emit(this.formValues);
+    const {name, description, product_tag, price, sku} = this.formValues.formValues;
+    const product = {
+      name,
+      description,
+      product_tag,
+      price,
+      sku
+    };
+
+    this.backend.saveProduct(product).subscribe((res: any) => {
+      const { status } = res;
+      if (status === 201) {
+
+        this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
+      }
+    });
+
   }
 
   resetForm() {
@@ -90,10 +80,51 @@ export class ProductFormComponent implements OnInit {
     return this.form.get(key);
   }
 
+  onUploadOutput(output: UploadOutput): void {
+    switch (output.type) {
+      case 'allAddedToQueue':
+        // uncomment this if you want to auto upload files when added
+        // const event: UploadInput = {
+        //   type: 'uploadAll',
+        //   url: '/upload',
+        //   method: 'POST',
+        //   data: { foo: 'bar' }
+        // };
+        // this.uploadInput.emit(event);
+        break;
+      case 'addedToQueue':
+        if (typeof output.file !== 'undefined') {
+          this.images.push(output.file);
+        }
+        break;
+      case 'uploading':
+        if (typeof output.file !== 'undefined') {
+          // update current data in files array for uploading file
+          const index = this.images.findIndex((file) => typeof output.file !== 'undefined' && file.id === output.file.id);
+          this.images[index] = output.file;
+        }
+        break;
+      case 'removed':
+        // remove file from array when removed
+        this.images = this.images.filter((file: UploadFile) => file !== output.file);
+        break;
+      case 'dragOver':
+        this.dragOver = true;
+        break;
+      case 'dragOut':
+      case 'drop':
+        this.dragOver = false;
+        break;
+      case 'done':
+        // The file is downloaded
+        break;
+    }
+  }
+
   startUpload(): void {
     const event: UploadInput = {
       type: 'uploadAll',
-      url: 'http://localhost/cesar/upload.php',
+      url: `${api.url}/product_images_create/`,
       method: 'POST'
       // includeWebKitFormBoundary: true,
       // data: {}
@@ -102,73 +133,31 @@ export class ProductFormComponent implements OnInit {
     this.uploadInput.emit(event);
   }
 
-  onUploadOutput({ type, file, ...evt }) {
-    switch (type) {
-      case 'dragOver':
-          this.dragOver = true;
-        break;
-      case 'removed':
-          this.images = this.images
-            .filter((img: UploadFile) => img !== file);
-        break;
-      case 'addedToQueue':
-          if (file) {
-            this.images.push(file);
-          }
-        break;
-      case 'done':
-          if (this.checkImagesUploading(this.images)) {
-            const mappedImages = this.images.map(({ name }) => name);
-            this.form.patchValue({
-              images: mappedImages,
-              image: mappedImages[0] || null
-            });
-            setTimeout(() => {
-              this.steps = Steps.UPLOADED_IMAGES;
-            }, 1500);
-          }
-        break;
-      default:
-          this.dragOver = false;
-        break;
-    }
-    this.imageStateHandler(this.images);
-    return true;
+  cancelUpload(id: string): void {
+    this.uploadInput.emit({ type: 'cancel', id: id });
   }
 
   removeImage(id: string): void {
     this.uploadInput.emit({ type: 'remove', id: id });
   }
 
+
+  removeAllFiles(): void {
+    this.uploadInput.emit({ type: 'removeAll' });
+  }
+
   getBlobImage(obj) {
     return this.utils.sanitizeBlobUrl(obj);
   }
 
-  private imageStateHandler(images: any[]) {
-    images.forEach(img => {
-      if (img.hasOwnProperty('responseStatus') && img.responseStatus !== 200) {
-        img.error = 'Error uploading image';
-        img.progress.data.percentage = -1;
-        this.steps = Steps.ERROR;
-      } else {
-        this.steps = Steps.READY;
-      }
-    });
-  }
-
-  private checkImagesUploading(images: any[]) {
-    return images.every(img => img.responseStatus && img.responseStatus === 200);
-  }
 
   private buildForm() {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      product_tag: [[], Validators.required],
       price: ['', Validators.required],
-      categories: [[], Validators.required],
-      tags: [[], Validators.required],
-      images: [[], Validators.required],
-      image: ['', Validators.required],
+      sku: ['', Validators.required]
     });
   }
 }

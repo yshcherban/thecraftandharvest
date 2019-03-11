@@ -82,6 +82,7 @@ export class HeaderComponent implements OnInit {
       this.auth.login({ ...formValues })
         .subscribe((res: any) => {
           const { body: { user, token }, status } = res;
+          console.log(token);
           if (status === 200) {
             this.auth.saveToken(token);
             this.auth.saveUser(user);

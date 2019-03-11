@@ -4,6 +4,8 @@ import { APIService } from '../api/api.service';
 import { AuthService } from '../auth/auth.service';
 import { HttpService } from '../http/http.service';
 
+const api = require('../../../../config/api.json');
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +18,7 @@ export class BackendService {
   ) { }
 
   getProducts() {
-    const url = `https://www.mocky.io/v2/5bc7a43e3200009c0059fbd2`;
+    const url = `${api.url}/products/`;
     return this.http.getData(url);
   }
 
