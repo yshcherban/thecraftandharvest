@@ -7,10 +7,20 @@ import { ProductViewModule } from './product-view';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
+import { ShopComponent } from './shop/shop.component';
+import { CoreModule } from './core';
+import { ProductListModule, UtilsModule } from './shared/components';
+
+import { PipesModule } from './shared/pipes';
+import { PrimeNGModule } from './shared/primeng.module';
+import { DirectivesModule } from './shared/directives';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ShopComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +28,13 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     SharedModule.forRoot(),
     HomeModule,
-    ProductViewModule
+    ProductViewModule,
+    CoreModule,
+    ProductListModule,
+    UtilsModule,
+    PipesModule,
+    PrimeNGModule,
+    DirectivesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

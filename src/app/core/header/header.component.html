@@ -7,22 +7,18 @@
       </div>
 
       <div class="header__brand">
-        <a [routerLink]="['/home']"><img src="assets/images/logo-1.png" alt="logo"></a>
-      </div>
-
-      <div class="header__search">
-        <form [ngClass]="{'open': isSearching}">
-          <input pInputText type="text" class="form-control" placeholder="Search..." autocomplete="off" name="search"
-            formControlName="search" (blur)="isSearching = false" (focus)="isSearching = true">
-          <span><i class="fas fa-search"></i></span>
-        </form>
+        <a [routerLink]="['/home']"><img src="assets/images/logo.svg" alt="logo"></a>
       </div>
 
       <nav class="header__nav">
         <div class="header__nav--desktop">
-          <ul>
-            <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
+          <ul class="nav-links">
+            <li><a [routerLink]="['/home']"> Home</a></li>
+            <li><a [routerLink]="['/shop']"> Shop</a></li>
+            <li><a [routerLink]="['/contact']"> Contact</a></li>
+          </ul>
 
+          <ul>
             <li *ngIf="isAuthenticated && user">
               <a href="javascript:void(0)" (click)="showUserMenu(userMenuOverlay)">
                 <i class="fas fa-user"></i> {{ user?.username }}
@@ -83,20 +79,6 @@
                 </div>
               </div>
             </li>
-            <li>
-              <a href="#"><i class="fas fa-bell"></i>
-                <span class="d-sm-inline d-md-none"> Notifications</span>
-                <span class="badge badge-primary">3</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" (click)="showCollapsedMenu(collapsedMenu)"><i class="fas fa-ellipsis-h"></i></a>
-              <div class="dropdown-menu" [ngClass]="{'show': visibleCollapsedMenu}" #collapsedMenu>
-                <a href="#" class="dropdown-menu__link">About us</a>
-                <a href="#" class="dropdown-menu__link">Terms and conditions</a>
-                <a href="#" class="dropdown-menu__link">Policy</a>
-              </div>
-            </li>
           </ul>
         </div>
 
@@ -122,9 +104,9 @@
 
           <ul>
             <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
+            <li><a [routerLink]="['/shop']"><i class="fas fa-shopping-bag"></i> Shop</a></li>
+            <li><a [routerLink]="['/contact']"><i class="fas fa-map-marker-alt"></i> Contact</a></li>
             <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-primary">1</span></a></li>
-            <li><a href="#"> About us </a></li>
-            <li> <a href="#"> Terms and conditions </a></li>
           </ul>
         </div>
 

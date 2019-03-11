@@ -25,10 +25,16 @@ $darkerText: #272f33;
 // Large devices (desktops, less than 1200px)
 // @media (max-width: 1199.98px) { ... }
 
+@font-face {
+  font-family: 'Baskerville Old Face';
+  src: url('/assets/fonts/BASKVILL.TTF') format('truetype');
+}
+
 body {
-  background: $baseGray;
+  background: #fff;
   // font-family: 'K2D', sans-serif;
-  font-family: 'Ubuntu', sans-serif;
+  //  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Baskerville Old Face';
 
   a {
     color: #6d7993;
@@ -42,9 +48,9 @@ body {
 
 .section-header {
   color: #545454;
-  font-size: 3em;
+  font-size: 2em;
   font-weight: 100;
-  margin: 40px 0;
+  margin: 40px 0 4rem;
   text-align: center;
   // &::after {
   //   content: '';
@@ -52,6 +58,14 @@ body {
   //   height: 3px;
   //   background: #545454;
   // }
+}
+
+.section-header ~ p {
+  text-align: center;
+}
+
+.section-block > section:nth-child(n+2) {
+  margin-top: 7rem;
 }
 
 .container {

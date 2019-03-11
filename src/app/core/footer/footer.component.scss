@@ -3,8 +3,26 @@
   color: #6d7993;
   display: block;
   width: 100%;
-  padding: 30px 0;
+  padding: 0 0 30px;
   margin-top: 40px;
+
+  &__info {
+      padding-top: 30px;
+      .fa-envelope,
+      .fa-phone {
+        margin-right: 7px;
+      }
+
+    span.weekends {
+      font-weight: bold;
+    }
+
+    div.working-hours {
+      > p:nth-of-type(1) {
+        text-decoration: underline;
+      }
+    }
+  }
 
   &__about {
     text-align: left;

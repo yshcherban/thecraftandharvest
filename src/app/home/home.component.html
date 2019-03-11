@@ -6,9 +6,37 @@
         </ng-template>
     </app-carousel>
     <div class="container">
-      <h1 class="section-header">Whole sale craft supplies</h1>
-      <app-product-list [products]="loadedProducts" *ngIf="loadedProducts?.length > 0"></app-product-list>
-      <button type="button" class="btn btn-primary btn-lg load-more" (click)="loadMoreItems()" [disabled]="doneLoading">Load More Items</button>
+      <div class="section-block">
+        <section>
+          <h4 class="section-header">Craft & Harvest</h4>
+          <p><i>craft:</i><br>
+            - an activity involving skill in making things by hand
+          </p>
+          <p><i>har·vest:</i><br>
+            - the process or period of gathering; an accumulated store or productive result
+          </p>
+        </section>
+
+        <section>
+          <h4 class="section-header">About Us</h4>
+          <p>Craft & Harvest started as a small hobby shop making things like candles, lip balms, hand salves, and more.
+            But as time went on, there became an apparent need of having more local items available to hobbyists and
+            craftspeople that the Denver market simply didn’t have. Soy wax for example, an all natural, USA grown
+            and made product, normally had to be shipped several times to several places before ever reaching candle
+            makers in Colorado. It's expensive and inefficient but now we can say that that process
+            has been vastly simplified. We get our product shipped directly from the facility that processes the
+            soybeans into the soy wax and distribute in the Denver and surrounding area offering free local pickup
+            and flat fee local deliveries. This dramatically reduces our carbon footprint and supports
+            sustainable USA soybean farmers at the same time!</p>
+        </section>
+
+        <section>
+          <h4 class="section-header">Our Goal</h4>
+          <p>Our goal as a company is to provide a variety of crafting items for candle makers and crafts people alike.
+            We are working hard to source the best, most sustainable, USA made items for all your crafting needs!</p>
+        </section>
+
+      </div>
     </div>
   </section>
   <app-floating-button>
@@ -17,14 +45,3 @@
     <button class="btn btn-primary" type="button"><i class="fas fa-filter"></i></button>
   </app-floating-button>
 </app-layout>
-
-<p-dialog [(visible)]="visibleProductForm" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false"
-  [positionTop]="20" header="Add a new product">
-  <app-product-form (formSubmit)="handleProductSubmit($event)" #productForm></app-product-form>
-  <p-footer>
-    <button type="button" class="btn btn-primary" (click)="productForm.handleSubmit()" *ngIf="productForm?.steps === 1"
-      [disabled]="!productForm?.formValues?.valid">Submit Product</button>
-    <button type="button" class="btn btn-secondary" (click)="productForm.startUpload()" *ngIf="productForm?.steps !== 1"
-      [disabled]="productForm?.images?.length <= 0 || productForm?.steps === 5">Continue</button>
-  </p-footer>
-</p-dialog>
