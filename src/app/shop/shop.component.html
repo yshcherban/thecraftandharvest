@@ -2,7 +2,7 @@
   <div class="search-bar">
     <div class="container">
       <form>
-        <div class="row">
+        <div class="row align-items-center">
           <div class="col-md-3">
             <div class="form-group">
               <select class="form-control">
@@ -14,17 +14,43 @@
               </select>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Search through multiple tags reparated by comas">
             </div>
           </div>
-          <div *ngIf="checkIsAdmin">
-            <div class="col-md-3">
-              <button type="button" class="btn btn-link btn-add" tooltip="Add your own product!" (click)="showProductForm()">
-                <i class="fas fa-plus"></i>
-                Product
-              </button>
+          <div class="col-md-2 text-center">
+            <div *ngIf="checkIsAdmin">
+              <div class="form-group">
+                <button type="button" class="btn btn-link btn-add" tooltip="Add your own product!" (click)="showProductForm()">
+                  <i class="fas fa-plus"></i>
+                  Product
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <div class="form-group">Search by price</div>
+          </div>
+          <div class="col-md-7">
+            <div class="row justify-content-start align-items-center">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="number" class="form-control" placeholder="Lowest Price">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group text-center">
+                  Between
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="number" class="form-control" placeholder="Highest Price">
+                </div>
+              </div>
             </div>
           </div>
         </div>
