@@ -62,7 +62,6 @@ export class ProductFormComponent implements OnInit {
     this.backend.saveProduct(product).subscribe((res: any) => {
       const { status } = res;
       if (status === 201) {
-
         this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
       }
     });

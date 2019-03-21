@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductItemComponent implements OnInit {
   @Input() product: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
@@ -42,7 +42,12 @@ export class ProductItemComponent implements OnInit {
   }
 
   get tags() {
-    return this.product.tags;
+    return this.formatString(this.product.product_tag);
+  }
+
+  formatString(string) {
+    return string.toString().replace(/\s/g, '')
+      .split(',').join(', ').replace(/P-/g,'');
   }
 
   get discountPorcentage() {

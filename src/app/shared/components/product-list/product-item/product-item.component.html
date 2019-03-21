@@ -6,35 +6,22 @@
 
   <header class="product-item__header">
     <h2>{{ name }}</h2>
-    <div class="product-item__header-clinks">
-      <a href="#" *ngFor="let cat of categories">{{ cat }}</a>
-    </div>
   </header>
-
   <div class="product-item__image-wrapper">
-    <div class="overlay">
-      <p class="description">{{ shortDescription }}...</p>
-      <a [routerLink]="['/product', id]" class="action btn btn-outline-light">See more</a>
+    <div class="content">
+      <a href="https://unsplash.com/photos/HkTMcmlMOUQ" target="_blank">
+        <div class="content-overlay"></div>
+        <img class="content-image" src="https://images.unsplash.com/photo-1433360405326-e50f909805b3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=359e8e12304ffa04a38627a157fc3362">
+        <div class="content-details fadeIn-left">
+          <p>{{shortDescription}}</p>
+        </div>
+      </a>
     </div>
-    <img src="{{ picture }}" alt="{{ name }}">
+    <div class="price text-center">Price: <span>{{ price }}</span></div>
   </div>
-
-  <!-- <div class="product-item__body">
-    <p>This is a short description</p>
-    <a href="#" class="btn btn-outline-primary">I wan this!</a>
-  </div> -->
   <footer class="product-item__footer">
-    <!-- <div class="product-item__footer-item">
-      <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart"></i></button>
-    </div> -->
-    <div class="product-item__footer-item">
-      <i class="far fa-calendar-alt"></i>
-      <span> May 13, 2014</span>
-    </div>
-    <div class="product-item__footer-item">
-      <div class="product-item__header-clinks">
-        <a href="#" *ngFor="let tag of tags">{{ tag }}</a>
-      </div>
+    <div class="tags">Tags:
+      <span> {{ tags }} </span>
     </div>
   </footer>
 
