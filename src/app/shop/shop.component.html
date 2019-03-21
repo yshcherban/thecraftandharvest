@@ -1,6 +1,37 @@
 <app-layout>
+  <div class="search-bar">
+    <div class="container">
+      <form>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search through multiple tags reparated by comas">
+            </div>
+          </div>
+          <div *ngIf="checkIsAdmin">
+            <div class="col-md-3">
+              <button type="button" class="btn btn-link btn-add" tooltip="Add your own product!" (click)="showProductForm()">
+                <i class="fas fa-plus"></i>
+                Product
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="container">
-    <h1 class="section-header">Whole sale craft supplies</h1>
     <app-product-list [products]="loadedProducts" *ngIf="loadedProducts?.length > 0"></app-product-list>
     <div class="text-center">
       <button type="button"
@@ -10,13 +41,6 @@
       </button>
     </div>
   </div>
-
-  <app-floating-button *ngIf="checkIsAdmin">
-    <button class="btn btn-secondary" type="button" tooltip="Add your own product!" placement="left" delay="500"
-            (click)="showProductForm()"><i class="fas fa-plus"></i></button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-filter"></i></button>
-  </app-floating-button>
-
 </app-layout>
 
 <p-dialog [(visible)]="visibleProductForm"
