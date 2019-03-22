@@ -4,7 +4,16 @@
                [useImagesLoaded]="true"
                [updateLayout]="true" #grid>
     <ngxMasonryItem class="product-list__item" *ngFor="let product of products">
-      <app-product-item [product]="product"></app-product-item>
+      <app-product-item (showimageform)="showAddImageForm($event)" [product]="product"></app-product-item>
     </ngxMasonryItem>
   </ngx-masonry>
 </div>
+
+<p-dialog [(visible)]="visibleAddImageForm"
+          [modal]="true"
+          [blockScroll]="true"
+          [resizable]="false"
+          [draggable]="false"
+          [positionTop]="20" header="Add Image to product">
+  <app-product-add-image-form></app-product-add-image-form>
+</p-dialog>

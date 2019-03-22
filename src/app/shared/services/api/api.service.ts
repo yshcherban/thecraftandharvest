@@ -30,8 +30,8 @@ export class APIService extends HttpService {
     return super.putData(`${this.baseURL}${path}`, payload, options);
   }
 
-  deleteData(path): Observable<Response> {
-    return super.deleteData(`${this.baseURL}${path}`);
+  deleteData(path, options = null): Observable<Response> {
+    return super.deleteData(`${this.baseURL}${path}`, options);
   }
 
   patchData(path, payload): Observable<Response> {

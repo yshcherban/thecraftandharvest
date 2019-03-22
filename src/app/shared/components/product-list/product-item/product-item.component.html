@@ -17,6 +17,16 @@
         </div>
       </a>
     </div>
+    <div *ngIf="checkIsAdmin">
+      <div class="btn-group">
+        <button type="button" class="btn btn-link" (click)="showAddImageForm()">
+          Add Images
+        </button>
+        <button type="button" class="btn btn-link" (click)="removeProduct(productIdFromProductUrl)">
+          Remove product
+        </button>
+      </div>
+    </div>
     <div class="price text-center">Price: <span>{{ price }}</span></div>
   </div>
   <footer class="product-item__footer">

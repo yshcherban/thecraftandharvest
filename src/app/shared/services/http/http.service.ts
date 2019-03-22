@@ -33,9 +33,9 @@ export class HttpService {
       );
   }
 
-  deleteData(path): Observable<Response> {
+  deleteData(path, options): Observable<Response> {
     return this.http
-      .delete(path)
+      .delete(path, options)
       .pipe(
         map(this.extractResponse),
         catchError(this.handleError)

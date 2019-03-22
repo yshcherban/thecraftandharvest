@@ -43,4 +43,17 @@ export class BackendService {
     );
   }
 
+  removeProduct(id) {
+    const url = `/products/${id}`;
+
+    return this.api.deleteData(url, {
+      headers: this.auth.signInRequest()
+    }).pipe(
+      tap(() => {
+        this._refreshNeeded$.next();
+      })
+    );
+
+  }
+
 }

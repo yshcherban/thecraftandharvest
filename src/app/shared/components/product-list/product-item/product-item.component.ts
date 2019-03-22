@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../../../shared/services';
+import { BackendService } from '../../../../shared/services';
+import { NotifyService } from 'ngx-notify';
 
 @Component({
   selector: 'app-product-item',
@@ -7,13 +10,28 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: any;
+  @Output() showimageform = new EventEmitter();
 
-  constructor() {}
+  constructor(
+    private auth: AuthService,
+    private backend: BackendService,
+    private notify: NotifyService,
+  ) {}
 
   ngOnInit() {}
 
   get id() {
     return this.product._id || this.product.id;
+  }
+
+  get productIdFromProductUrl() {
+    const productUrl = this.product.url;
+    const productId = productUrl.match(/.*\/(.*)\//)[1];
+    return productId;
+  }
+
+  get info() {
+    return this.product;
   }
 
   get name() {
@@ -55,6 +73,23 @@ export class ProductItemComponent implements OnInit {
     const salePrice = parseInt(this.product.sale_price, 0);
 
     return Math.round((regularPrice - salePrice) / regularPrice * 100 || 0);
+  }
+
+  get checkIsAdmin() {
+    return this.auth.checkIsAdmin();
+  }
+
+  showAddImageForm() {
+    this.showimageform.emit();
+  }
+
+  removeProduct(id) {
+    this.backend.removeProduct(id).subscribe((res: any) => {
+      const { status } = res;
+      if (status === 204) {
+        this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
+      }
+    });
   }
 
 }
