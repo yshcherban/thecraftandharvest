@@ -11,6 +11,7 @@ import { NotifyService } from 'ngx-notify';
 export class ProductItemComponent implements OnInit {
   @Input() product: any;
   @Output() showimageform = new EventEmitter();
+  @Output() productId = new EventEmitter();
 
   constructor(
     private auth: AuthService,
@@ -79,7 +80,8 @@ export class ProductItemComponent implements OnInit {
     return this.auth.checkIsAdmin();
   }
 
-  showAddImageForm() {
+  showAddImageForm(id) {
+    this.productId = id;
     this.showimageform.emit();
   }
 
@@ -87,7 +89,7 @@ export class ProductItemComponent implements OnInit {
     this.backend.removeProduct(id).subscribe((res: any) => {
       const { status } = res;
       if (status === 204) {
-        this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
+        this.notify.success(`Done`, `Product successfully deleted`, { timeout: 3000 });
       }
     });
   }

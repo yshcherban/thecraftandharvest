@@ -19,7 +19,7 @@
     </div>
     <div *ngIf="checkIsAdmin">
       <div class="btn-group">
-        <button type="button" class="btn btn-link" (click)="showAddImageForm()">
+        <button type="button" class="btn btn-link" (click)="showAddImageForm(productIdFromProductUrl)">
           Add Images
         </button>
         <button type="button" class="btn btn-link" (click)="removeProduct(productIdFromProductUrl)">

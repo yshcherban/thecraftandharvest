@@ -1,7 +1,7 @@
 <div class="product-form">
   <form novalidate (ngSubmit)="handleSubmit()" [formGroup]="imageform">
     <input type="hidden"
-           formControlName="product_image" value={{images?.length > 0 ? true : ''}}>
+           formControlName="product_image" [value]="images?.length > 0 ? 'true' : ''" />
     <app-error-label [control]="getControl('product_image')"></app-error-label>
 
     <div class="form-group">
@@ -35,8 +35,7 @@
     </div>
 
     <p-footer>
-      <button
-        [disabled]="images?.length > 0"
+      <button [disabled]="images?.length < 1"
         class="btn btn-primary"
         type="submit">Save Images</button>
     </p-footer>

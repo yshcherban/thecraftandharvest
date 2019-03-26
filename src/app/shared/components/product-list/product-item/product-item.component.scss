@@ -6,6 +6,19 @@
   transition: all 0.4s ease-in;
   position: relative;
 
+  .btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .price {
+    padding: 10px 0;
+    font-size: 20px;
+    color: #0f445e;
+  }
+
   img {
     display: block;
     width: 100%;

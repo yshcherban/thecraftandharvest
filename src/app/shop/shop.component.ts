@@ -72,6 +72,7 @@ export class ShopComponent implements OnInit {
 
     this.currentIndex = this.currentIndex + this.totalItems;
     if (total > this.products.length) {
+      console.log('Really ?');
       this.doneLoading = true;
     }
   }

@@ -16,6 +16,7 @@ export class ProductAddImageFormComponent implements OnInit {
   images: UploadFile[];
   humanizeBytes: Function;
   imageform: FormGroup;
+  productId: number;
 
   constructor(
     private utils: UtilsService,
@@ -31,7 +32,7 @@ export class ProductAddImageFormComponent implements OnInit {
   }
 
   handleSubmit() {
-
+    console.log(this.productId);
   }
 
   getControl(key) {
