@@ -11,7 +11,7 @@ import { NotifyService } from 'ngx-notify';
 export class ProductItemComponent implements OnInit {
   @Input() product: any;
   @Output() showimageform = new EventEmitter();
-  @Output() productId = new EventEmitter();
+  @Output() productIdEvent = new EventEmitter();
 
   constructor(
     private auth: AuthService,
@@ -80,8 +80,8 @@ export class ProductItemComponent implements OnInit {
     return this.auth.checkIsAdmin();
   }
 
-  showAddImageForm(id) {
-    this.productId = id;
+  showAddImageForm(productId) {
+    this.productIdEvent.emit(productId);
     this.showimageform.emit();
   }
 

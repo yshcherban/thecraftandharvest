@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 import { UtilsService } from '../../../../services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 const api = require('../../../../../../config/api.json');
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-product-add-image-form',
@@ -16,11 +17,12 @@ export class ProductAddImageFormComponent implements OnInit {
   images: UploadFile[];
   humanizeBytes: Function;
   imageform: FormGroup;
-  productId: number;
+  @Input() productId: any;
 
   constructor(
     private utils: UtilsService,
     private fb: FormBuilder,
+    private auth: AuthService,
   ) {
     this.uploadingOptions = { concurrency: 1, maxUploads: 4, allowedContentTypes: ['image/png', 'image/jpeg'] };
     this.humanizeBytes = humanizeBytes;
@@ -32,7 +34,19 @@ export class ProductAddImageFormComponent implements OnInit {
   }
 
   handleSubmit() {
-    console.log(this.productId);
+    // const imagesInBlob = this.images.map((img, key) => {
+    //   return this.getBlobImage(img.nativeFile);
+    // });
+
+    // console.log(
+    //   {
+    //     'Authorization': `JWT ${this.auth.token}`,
+    //     "product": this.productId,
+    //     "filecomment": "product image",
+    //     "images": imagesInBlob
+    //   })
+
+    this.startUpload();
   }
 
   getControl(key) {
@@ -81,12 +95,30 @@ export class ProductAddImageFormComponent implements OnInit {
   }
 
   startUpload(): void {
+    console.log(this.auth.token);
+    const productId = this.productId;
+    const imagesInBlob = this.images.map((img, key) => {
+      return img.nativeFile;
+    });
+
+    const imgFile = [...imagesInBlob];
+
+    console.log(imgFile);
+
     const event: UploadInput = {
       type: 'uploadAll',
       url: `${api.url}/product_images_create/`,
-      method: 'POST'
-      // includeWebKitFormBoundary: true,
-      // data: {}
+      method: 'POST',
+      headers: {
+        'Authorization': `JWT ${this.auth.token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+      //includeWebKitFormBoundary: true,
+      data: {
+        "product": "2",
+        "filecomment": "product image",
+        "images": "https://cdn.vox-cdn.com/thumbor/USPKT0Vcmjkcx_7kb-lBLnuJ1Is=/983x935:2424x2667/1200x800/filters:focal(1351x1042:1991x1682)/cdn.vox-cdn.com/uploads/chorus_image/image/60034597/GettyImages_971886594.0.jpg",
+      }
     };
 
     this.uploadInput.emit(event);
