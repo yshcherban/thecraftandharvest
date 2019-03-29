@@ -32,6 +32,11 @@ export class BackendService {
     return this.http.getData(url);
   }
 
+  getProductsImage() {
+    const url = `${api.url}/product_images/`;
+    return this.http.getData(url);
+  }
+
   saveProduct(product) {
     const url = `/products/`;
     return this.api.postData(url, product, {

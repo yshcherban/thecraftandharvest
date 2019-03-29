@@ -13,13 +13,17 @@ export class ProductItemComponent implements OnInit {
   @Output() showimageform = new EventEmitter();
   @Output() productIdEvent = new EventEmitter();
 
+  productImage;
+
   constructor(
     private auth: AuthService,
     private backend: BackendService,
     private notify: NotifyService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProductImages();
+  }
 
   get id() {
     return this.product._id || this.product.id;
@@ -79,6 +83,26 @@ export class ProductItemComponent implements OnInit {
   get checkIsAdmin() {
     return this.auth.checkIsAdmin();
   }
+
+  getProductImages() {
+    const fromUrl = this.productIdFromProductUrl;
+
+    this.backend.getProductsImage().subscribe((imagaData: any) => {
+
+      const productImages = imagaData.filter(imagaData =>
+        imagaData.product.url.match(/.*\/(.*)\//)[1] === fromUrl
+      );
+
+      const productImage = productImages.map(obj => {
+        return obj.image;
+      });
+
+      this.productImage = productImage !== undefined ? productImage[0] : ``;
+
+    });
+
+  }
+
 
   showAddImageForm(productId) {
     this.productIdEvent.emit(productId);
