@@ -13,6 +13,8 @@ import { BackendService } from '../../../../shared/services';
 })
 export class ProductFormComponent implements OnInit {
   @Input() data: object;
+  @Input() visibleProductForm;
+  @Output() visibleProductFormModel = new EventEmitter();
   //@ViewChild('uploader') uploader: ElementRef;
   form: FormGroup;
 
@@ -51,6 +53,8 @@ export class ProductFormComponent implements OnInit {
     this.backend.saveProduct(product).subscribe((res: any) => {
       const { status } = res;
       if (status === 201) {
+        this.resetForm();
+        this.visibleProductFormModel.emit(false);
         this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
       }
     });

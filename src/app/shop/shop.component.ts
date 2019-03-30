@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
 import { NotifyService } from 'ngx-notify';
 
 import { AuthService, ScreenService, BackendService } from '../shared/services';
@@ -11,7 +11,9 @@ import { AuthService, ScreenService, BackendService } from '../shared/services';
 export class ShopComponent implements OnInit {
   products: any[] = [];
   loadedProducts: any[] = [];
+
   visibleProductForm = false;
+
   totalItems = 10;
   currentIndex = 0;
   lastIndex = 10;
@@ -58,6 +60,10 @@ export class ShopComponent implements OnInit {
 
   showProductForm() {
     this.visibleProductForm = true;
+  }
+
+  setProductForimVisible(value) {
+    this.visibleProductForm = value;
   }
 
 

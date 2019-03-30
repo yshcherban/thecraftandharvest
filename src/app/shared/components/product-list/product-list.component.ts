@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
   gridOptions: NgxMasonryOptions = {
     gutter: 0,
     originTop: true,
-    transitionDuration: '0.4s'
+    transitionDuration: 0,
   };
 
   constructor() {}

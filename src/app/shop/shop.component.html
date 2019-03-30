@@ -75,5 +75,6 @@
           [resizable]="false"
           [draggable]="false"
           [positionTop]="20" header="Add a new product">
-  <app-product-form></app-product-form>
+  <app-product-form [visibleProductForm]="visibleProductForm"
+                    (visibleProductFormModel)="setProductForimVisible($event)"></app-product-form>
 </p-dialog>
