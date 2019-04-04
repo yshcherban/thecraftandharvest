@@ -110,12 +110,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   removeProduct(id) {
-    this.backend.removeProduct(id).subscribe((res: any) => {
-      const { status } = res;
-      if (status === 204) {
-        this.notify.success(`Done`, `Product successfully deleted`, { timeout: 3000 });
-      }
-    });
+    return this.backend.removeProduct(id);
   }
 
 }

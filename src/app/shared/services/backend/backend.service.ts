@@ -4,8 +4,9 @@ import { APIService } from '../api/api.service';
 import { AuthService } from '../auth/auth.service';
 import { HttpService } from '../http/http.service';
 
-import {Observable, Subject} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {Observable, Subject, from, forkJoin} from 'rxjs';
+import {tap, mergeMap} from 'rxjs/operators';
+import { NotifyService } from 'ngx-notify';
 
 const api = require('../../../../config/api.json');
 
@@ -18,6 +19,7 @@ export class BackendService {
     private api: APIService,
     private http: HttpService, // temporal
     private auth: AuthService,
+    private notify: NotifyService,
   ) { }
 
 
@@ -49,14 +51,68 @@ export class BackendService {
   }
 
   removeProduct(id) {
+    const productId = id;
     const url = `/products/${id}`;
 
-    return this.api.deleteData(url, {
-      headers: this.auth.signInRequest()
-    }).pipe(
-      tap(() => {
-        this._refreshNeeded$.next();
-      })
+
+    return this.getProductImages().subscribe((imageDataArr:any) => {
+
+      const productImages = imageDataArr.filter(imageDataObj => {
+        return imageDataObj.product.url.match(/.*\/(.*)\//)[1] === productId
+      });
+
+      const productImageIds = productImages.map(image => {
+        return image.id;
+      });
+
+
+      if (productImageIds.length > 0) {
+        const deleteProductDataResponse = this.api.deleteData(url, {
+          headers: this.auth.signInRequest()
+        });
+
+        const deleteProductImagesResponse = this.removeProductImages(productImageIds);
+
+
+        return forkJoin([deleteProductDataResponse, deleteProductImagesResponse]).pipe(
+          tap(() => {
+            this._refreshNeeded$.next();
+          })
+        ).subscribe(([res, res2]) => {
+          this.notify.success(`Done`, `Product successfully deleted`, { timeout: 3000 });
+        })
+
+      } else {
+        return this.api.deleteData(url, {
+          headers: this.auth.signInRequest()
+        }).pipe(
+          tap(() => {
+            this._refreshNeeded$.next();
+          })
+        ).subscribe((res: any) => {
+          const { status } = res;
+          if (status === 204) {
+            this.notify.success(`Done`, `Product successfully deleted`, { timeout: 3000 });
+          }
+        });
+      }
+
+    });
+
+  }
+
+  getProductImages() {
+    const url = `${api.url}/product_images/`;
+    return this.http.getData(url);
+  }
+
+  removeProductImages(arrIds) {
+    const imageIds = from(arrIds);
+
+    return imageIds.pipe(
+      mergeMap(id => this.api.deleteData(`/product_images/${id}/`, {
+        headers: this.auth.signInRequest()
+      }))
     );
 
   }
