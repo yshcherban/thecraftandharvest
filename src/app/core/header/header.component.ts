@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NotifyService } from 'ngx-notify';
 import { Subscription, fromEvent } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService, UtilsService, ScreenService } from '../../shared/services';
 
 @Component({
@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit {
     private screen: ScreenService,
     private notify: NotifyService,
     private auth: AuthService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private jwtHelper: JwtHelperService,
   ) {}
 
   get isAuthenticated() {
@@ -82,7 +83,19 @@ export class HeaderComponent implements OnInit {
       this.auth.login({ ...formValues })
         .subscribe((res: any) => {
           const { body: { user, token }, status } = res;
-          console.log(token);
+
+          /*
+          const dateInTime = new Date().setMinutes(2);
+
+          const decodedToken = this.jwtHelper.decodeToken(token);
+          console.log(decodedToken.exp);
+          decodedToken.exp = dateInTime;
+          console.log(decodedToken.exp);
+
+
+          const encodedToken = btoa(JSON.stringify(decodedToken));
+          console.log(this.jwtHelper.getTokenExpirationDate(encodedToken));
+          */
           if (status === 200) {
             this.auth.saveToken(token);
             this.auth.saveUser(user);

@@ -7,7 +7,6 @@ import { ErrorLabelComponent } from './error-label/error-label.component';
 import { ReviewStarsComponent } from './review-stars/review-stars.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 import { PlaceholderComponent } from './placeholder/placeholder.component';
-import { FloatingButtonComponent } from './floating-button/floating-button.component';
 import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { CarouselComponent } from './carousel/carousel.component';
   declarations: [
     ErrorLabelComponent,
     ReviewStarsComponent,
-    FloatingButtonComponent,
     PreloaderComponent,
     PlaceholderComponent,
     CarouselComponent
@@ -27,7 +25,6 @@ import { CarouselComponent } from './carousel/carousel.component';
   exports: [
     ErrorLabelComponent,
     ReviewStarsComponent,
-    FloatingButtonComponent,
     PreloaderComponent,
     PlaceholderComponent,
     CarouselComponent

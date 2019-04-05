@@ -6,35 +6,33 @@
 
   <header class="product-item__header">
     <h2>{{ name }}</h2>
-    <div class="product-item__header-clinks">
-      <a href="#" *ngFor="let cat of categories">{{ cat }}</a>
-    </div>
   </header>
-
   <div class="product-item__image-wrapper">
-    <div class="overlay">
-      <p class="description">{{ shortDescription }}...</p>
-      <a [routerLink]="['/product', id]" class="action btn btn-outline-light">See more</a>
+    <div class="content">
+      <a href="https://unsplash.com/photos/HkTMcmlMOUQ" target="_blank">
+        <div class="content-overlay"></div>
+        <img class="content-image" src={{productImage}}>
+        <div class="content-details fadeIn-left">
+          <p>{{shortDescription}}</p>
+        </div>
+      </a>
     </div>
-    <img src="{{ picture }}" alt="{{ name }}">
-  </div>
-
-  <!-- <div class="product-item__body">
-    <p>This is a short description</p>
-    <a href="#" class="btn btn-outline-primary">I wan this!</a>
-  </div> -->
-  <footer class="product-item__footer">
-    <!-- <div class="product-item__footer-item">
-      <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart"></i></button>
-    </div> -->
-    <div class="product-item__footer-item">
-      <i class="far fa-calendar-alt"></i>
-      <span> May 13, 2014</span>
-    </div>
-    <div class="product-item__footer-item">
-      <div class="product-item__header-clinks">
-        <a href="#" *ngFor="let tag of tags">{{ tag }}</a>
+    <div *ngIf="checkIsAdmin">
+      <div class="btn-group">
+        <button [disabled]="productImage" type="button" class="btn btn-link"
+                (click)="showAddImageForm(productIdFromProductUrl)">
+          Add Images
+        </button>
+        <button type="button" class="btn btn-link" (click)="removeProduct(productIdFromProductUrl)">
+          Remove product
+        </button>
       </div>
+    </div>
+    <div class="price text-center">Price: <span>{{ price }}</span></div>
+  </div>
+  <footer class="product-item__footer">
+    <div class="tags">Tags:
+      <span> {{ tags }} </span>
     </div>
   </footer>
 

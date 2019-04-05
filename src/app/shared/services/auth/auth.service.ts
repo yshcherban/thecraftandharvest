@@ -66,4 +66,11 @@ export class AuthService {
     return this.token ? !this.jwtHelper.isTokenExpired(this.token) : false;
   }
 
+
+  public checkIsAdmin() {
+    if(this.user) {
+      return this.user.is_admin ? true : false;
+    }
+  }
+
 }
