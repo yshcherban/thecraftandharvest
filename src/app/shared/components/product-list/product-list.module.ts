@@ -12,6 +12,7 @@ import { DirectivesModule } from '../../directives';
 import { PrimeNGModule } from '../../primeng.module';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductAddImageFormComponent } from './product-item/product-add-image-form/product-add-image-form.component';
+import { ProductEditFormComponent } from './product-item/product-edit-form/product-edit-form.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ProductAddImageFormComponent } from './product-item/product-add-image-f
     ProductListComponent,
     ProductItemComponent,
     ProductFormComponent,
-    ProductAddImageFormComponent
+    ProductAddImageFormComponent,
+    ProductEditFormComponent
   ],
   exports: [
     ProductListComponent,

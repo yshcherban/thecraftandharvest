@@ -11,6 +11,7 @@ import { NotifyService } from 'ngx-notify';
 export class ProductItemComponent implements OnInit {
   @Input() product: any;
   @Output() showimageform = new EventEmitter();
+  @Output() showproducteditform = new EventEmitter();
   @Output() productIdEvent = new EventEmitter();
 
   productImage;
@@ -107,6 +108,11 @@ export class ProductItemComponent implements OnInit {
   showAddImageForm(productId) {
     this.productIdEvent.emit(productId);
     this.showimageform.emit();
+  }
+
+  showEditProductForm(productId) {
+    this.productIdEvent.emit(productId);
+    this.showproducteditform.emit();
   }
 
   removeProduct(id) {

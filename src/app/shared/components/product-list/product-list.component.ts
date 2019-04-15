@@ -11,6 +11,7 @@ export class ProductListComponent implements OnInit {
   @ViewChild('grid') grid: any;
 
   visibleAddImageForm = false;
+  visibleProductEditForm = false;
   productId;
 
   gridOptions: NgxMasonryOptions = {
@@ -25,6 +26,10 @@ export class ProductListComponent implements OnInit {
 
   showAddImageForm(event) {
     this.visibleAddImageForm = true;
+  }
+
+  showProductEditForm(event) {
+    this.visibleProductEditForm = true;
   }
 
   sendProductId($event) {

@@ -1,0 +1,49 @@
+<div class="product-form">
+  <form novalidate (ngSubmit)="handleSubmit()" [formGroup]="form">
+
+    <div class="form-group">
+      <label>Product Name</label>
+      <input pInputText type="text" class="form-control" autocomplete="off"
+             formControlName="name"
+             placeholder="Enter your product name">
+      <app-error-label [control]="getControl('name')"></app-error-label>
+    </div>
+
+    <div class="form-group">
+      <label>Product SKU</label>
+      <input pInputText type="text" class="form-control" autocomplete="off"
+             formControlName="sku"
+             placeholder="SKU">
+      <app-error-label [control]="getControl('sku')"></app-error-label>
+    </div>
+
+    <div class="form-group">
+      <label>Product Price</label>
+      <div class="ui-inputgroup price">
+        <span class="ui-inputgroup-addon">$</span>
+        <input type="text" pInputText formControlName="price" placeholder="0">
+      </div>
+      <app-error-label [control]="getControl('price')"></app-error-label>
+    </div>
+
+    <div class="form-group">
+      <label>Product Description</label>
+      <textarea pInputTextarea class="form-control" autocomplete="off" formControlName="description" [rows]="5"></textarea>
+      <app-error-label [control]="getControl('description')"></app-error-label>
+    </div>
+
+    <div class="form-group">
+      <label>Tags</label>
+      <p-chips autocomplete="off" formControlName="product_tag"></p-chips>
+      <app-error-label [control]="getControl('product_tag')"></app-error-label>
+    </div>
+
+
+    <p-footer>
+      <button
+        [disabled]="!form.valid"
+        class="btn btn-primary"
+        type="submit">Submit Product</button>
+    </p-footer>
+  </form>
+</div>

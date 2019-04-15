@@ -1,0 +1,114 @@
+.product-form {
+  width: 600px;
+  min-height: 400px;
+  max-height: 600px;
+  margin: 0 auto;
+  padding: 20px 60px;
+
+  label {
+    display: block;
+    color: #272f33;
+    font-size: 1.1em;
+  }
+
+  &__images-list {
+    display: block;
+    margin-top: 25px;
+    width: 100%;
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .image-wrapper {
+      height: auto;
+      width: 40px;
+      flex: 0 0 20%;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      width: 100%;
+      object-fit: cover;
+    }
+
+
+    span {
+      padding: 0 20px;
+      flex: 0 0 75%;
+      text-align: center;
+    }
+
+    a {
+      color: #6d7993;
+      font-size: 1.1em;
+      text-decoration: none;
+      flex: 0 0 5%;
+      text-align: right;
+      &:hover {
+        color: #545454;
+      }
+    }
+
+    .status {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+}
+
+// file drop only
+.drop-container {
+  width: 100%;
+  border: 2px dashed rgb(142, 142, 142);
+  border-radius: 10px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  outline: none;
+  padding: 0px;
+  position: relative;
+}
+
+.drop-content {
+  color: #272f33;
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  text-align: center;
+  i {
+    display: block;
+    font-size: 2.2em;
+  }
+  span {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  small {
+    display: block;
+  }
+}
+
+.is-drop-over {
+  background: #e2e2e2;
+}
+
+.is-done {
+  border: none;
+  height: 0px;
+  opacity: 0;
+}

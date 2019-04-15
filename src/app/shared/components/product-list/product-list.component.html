@@ -8,6 +8,7 @@
         <app-product-item
           (productIdEvent)="sendProductId($event)"
           (showimageform)="showAddImageForm($event)"
+          (showproducteditform)="showProductEditForm($event)"
           [product]="product"></app-product-item>
         </div>
   </ngx-masonry>
@@ -20,4 +21,13 @@
           [draggable]="false"
           [positionTop]="20" header="Add Image to product">
   <app-product-add-image-form [productId]="productId"></app-product-add-image-form>
+</p-dialog>
+
+<p-dialog [(visible)]="visibleProductEditForm"
+          [modal]="true"
+          [blockScroll]="true"
+          [resizable]="false"
+          [draggable]="false"
+          [positionTop]="20" header="Edit product">
+  <app-product-edit-form [productId]="productId"></app-product-edit-form>
 </p-dialog>
