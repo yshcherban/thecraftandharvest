@@ -36,4 +36,8 @@ export class ProductListComponent implements OnInit {
     this.productId = $event;
   }
 
+  setProductFormVisible(value) {
+    this.visibleProductEditForm = value;
+  }
+
 }

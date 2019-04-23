@@ -29,5 +29,7 @@
           [resizable]="false"
           [draggable]="false"
           [positionTop]="20" header="Edit product">
-  <app-product-edit-form [productId]="productId"></app-product-edit-form>
+
+  <app-product-edit-form
+    (visibleProductFormModel)="setProductFormVisible($event)"></app-product-edit-form>
 </p-dialog>

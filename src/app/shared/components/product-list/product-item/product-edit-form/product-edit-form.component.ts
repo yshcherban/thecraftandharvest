@@ -13,7 +13,7 @@ import { BackendService } from '../../../../../shared/services';
 })
 export class ProductEditFormComponent implements OnInit {
   @Input() data: object;
-  @Input() visibleProductForm;
+  
   @Input() productId: any;
   @Output() visibleProductFormModel = new EventEmitter();
   form: FormGroup;
@@ -35,9 +35,18 @@ export class ProductEditFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!!this.data) {
-      this.form.patchValue(this.data);
-    }
+    console.log(this.productId);
+    //this.getProductById(this.productId);
+    // if (!!this.data) {
+    //   this.form.patchValue(this.data);
+    // }
+  }
+
+  getProductById(productId) {
+    this.backend.getProducts().subscribe((products: any) => {
+      //console.log(productId);
+      //console.log(products);
+    });
   }
 
   handleSubmit() {
@@ -50,14 +59,14 @@ export class ProductEditFormComponent implements OnInit {
       sku
     };
 
-    this.backend.saveProduct(product).subscribe((res: any) => {
-      const { status } = res;
-      if (status === 201) {
-        this.resetForm();
-        this.visibleProductFormModel.emit(false);
-        this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
-      }
-    });
+    // this.backend.saveProduct(product).subscribe((res: any) => {
+    //   const { status } = res;
+    //   if (status === 201) {
+    //     this.resetForm();
+    //     this.visibleProductFormModel.emit(false);
+    //     this.notify.success(`Done`, `Product successfully added`, { timeout: 3000 });
+    //   }
+    // });
 
   }
 
