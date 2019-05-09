@@ -13,7 +13,7 @@ import { BackendService } from '../../../../../shared/services';
 })
 export class ProductEditFormComponent implements OnInit {
   @Input() data: object;
-  
+
   @Input() productId: any;
   @Output() visibleProductFormModel = new EventEmitter();
   form: FormGroup;
